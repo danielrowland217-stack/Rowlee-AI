@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarkHaven Projects</title>
+  <style>
+  #projects {
+  padding: 80px 20px;
+  text-align: center;
+  
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  color: #fff;
+  font-family: arial;
+}
+
+.projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.project-card {
+  background: #1a1a1a;
+  border-radius: 15px;
+  overflow: hidden;
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.project-card h3 {
+  margin: 15px 0 10px;
+  color: #6f42c1;
+  font-family: arial
+}
+
+.project-card p {
+  color: #ccc;
+  font-size: 0.95rem;
+  padding: 0 15px 15px;
+  font-family: arial;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #6f42c1;
+}
+
+.project-filters {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.filter-btn {
+  padding: 8px 20px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: #6f42c1;
+  color: white;
+}
+
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* behind all content */
+  background: #0d0d0d; /* dark background */
+}
+  </style>
+</head>
+
+<body>
+  <section id="projects">
+  <h2 class="section-title">Community Projects</h2>
+  
+  <div class="project-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="web">Web</button>
+    <button class="filter-btn" data-filter="mobile">Mobile</button>
+    <button class="filter-btn" data-filter="opensource">Open Source</button>
+  </div>
+
+  <div class="projects-container">
+    <div class="project-card" data-category="web">
+      <img src="photo-1618477247222-acbdb0e159b3.jpg" alt="Hackathon Website">
+      <h3>Hackathon Website</h3>
+      <p>Developed by our community members during the 2025 hackathon.</p>
+    </div>
+    <div class="project-card" data-category="mobile">
+      <img src="photo-1512941937669-90a1b58e7e9ciphno.jpg" alt="Mobile App">
+      <h3>Mobile App</h3>
+      <p>A collaborative app built to streamline event management.</p>
+    </div>
+    <div class="project-card" data-category="opensource">
+      <img src="premium_photo-1750053353243-31977e1e9909.jpg" alt="Open Source Library">
+      <h3>Open Source Library</h3>
+      <p>An open-source tool created for developers in the community.</p>
+    </div>
+    <div class="project-card" data-category="web">
+      <img src="photo-1733222765234-08c33d436c50public.jpg" alt="Community Forum">
+      <h3>Community Forum</h3>
+      <p>A discussion platform built for project collaboration and networking.</p>
+    </div>
+  </div>
+</section>
+
+<canvas id="bg-canvas"></canvas>
+
+<script>
+  const projectCards = document.querySelectorAll('.project-card');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+projectCards.forEach(card => {
+  card.style.transform = 'translateY(20px)'; // initial offset
+  observer.observe(card);
+});
+
+
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+
+let particlesArray;
+
+// Set canvas size
+function initCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+initCanvas();
+window.addEventListener('resize', initCanvas);
+
+// Particle class
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 3 + 1; // 1-4px
+    this.speedX = Math.random() * 1 - 0.5; // horizontal speed
+    this.speedY = Math.random() * 1 - 0.5; // vertical speed
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    // Wrap around edges
+    if(this.x > canvas.width) this.x = 0;
+    if(this.x < 0) this.x = canvas.width;
+    if(this.y > canvas.height) this.y = 0;
+    if(this.y < 0) this.y = canvas.height;
+  }
+
+  draw() {
+    ctx.fillStyle = '#6f42c1';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// Initialize particles
+function initParticles() {
+  particlesArray = [];
+  const numberOfParticles = 100;
+  for(let i=0; i<numberOfParticles; i++){
+    particlesArray.push(new Particle());
+  }
+}
+initParticles();
+
+// Animate
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particlesArray.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>

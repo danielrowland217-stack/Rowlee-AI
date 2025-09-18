@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Darkhaven Sign</title>
+  <style>
+    /* Shared styles for Signup & Login Sections */
+.auth-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+  background: url(photo-1514826786317-59744fe2a548.jpg);
+  color: white;
+  min-height: 77vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.auth-box {
+  background: #1a1a1a;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 6px 25px rgba(20, 135, 241, 0.5);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.auth-box h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #00bfff;
+  font-family: arial;
+}
+
+.auth-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-box input {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #2a2a2a;
+  color: white;
+}
+
+.auth-box input::placeholder {
+  color: #aaa;
+}
+
+.auth-box button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #00bfff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.auth-box button:hover {
+  background: #009acd;
+}
+
+.auth-box p {
+  margin-top: 20px;
+  font-size: 0.95rem;
+  color: #ccc;
+  font-family: arial;
+}
+
+.auth-box p a {
+  color: #00bfff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-box p a:hover {
+  text-decoration: underline;
+}
+  </style>
+</head>
+<body>
+  <!-- Sign Up Section -->
+<section class="auth-section" id="signup">
+  <div class="auth-box">
+    <h2>Create Account</h2>
+    <form>
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <input type="password" placeholder="Password" required>
+    </form>
+    <p>Already have an account? <a href="darkhaven login.html">Login</a></p>
+
+    <a href="darkhavenhome.html">
+        <button onclick="document.getElementById('Sign Up').classList.toggle('active')">
+         Sign Up
+        </button>
+      </a>
+  </div>
+</section>
+</body>
+</html>

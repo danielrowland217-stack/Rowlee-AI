@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarkHaven Features</title>
+  <style>
+    /* Features Section */
+.features-section {
+  padding: 80px 20px;
+  text-align: center;
+  min-height: 77vh;
+  background: url(premium_photo-1675356073922-24e1fa167d9a\ good\ sh.jpg);
+  background-size: 600% 600%;
+  animation: gradientMove 30s ease infinite;
+  background-repeat: no-repeat;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 50px;
+  color: #00e5ff;
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.feature-card {
+  background: #1a1a1a;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.6);
+  transition: 0.3s;
+}
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+}
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+.feature-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  color: #fff;
+}
+.feature-card p {
+  font-size: 0.95rem;
+  color: #aaa;
+}
+
+/* Bounce animation */
+@keyframes bounceIn {
+  0%   { transform: scale(0.3); opacity: 0; }
+  50%  { transform: scale(1.2); opacity: 1; }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.feature-card .feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  display: inline-block;
+  opacity: 0; /* hidden before animation */
+}
+
+/* Title Underline Animation */
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 50px;
+  color: #00e5ff;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* Glowing underline effect */
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: #00e5ff;
+  box-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
+  transform: translateX(-50%);
+  transition: width 0.6s ease;
+}
+
+/* Animate underline when visible */
+.section-title.visible::after {
+  width: 100%;
+}
+  </style>
+</head>
+<body>
+  <!-- Features Section -->
+<section class="features-section">
+  <h2 class="section-title">What You Can Do on DarkHaven</h2>
+
+  <div class="features-grid">
+    <div class="feature-card fade-in">
+      <div class="feature-icon">🌐</div>
+      <h3>Connect Globally</h3>
+      <p>Meet changemakers from across the world and exchange ideas.</p>
+    </div>
+
+    <div class="feature-card fade-in">
+      <div class="feature-icon">💼</div>
+      <h3>Find Opportunities</h3>
+      <p>Discover jobs, scholarships, and grants tailored for you.</p>
+    </div>
+
+    <div class="feature-card fade-in">
+      <div class="feature-icon">🤝</div>
+      <h3>Collaborate on Projects</h3>
+      <p>Form teams and build impactful solutions together.</p>
+    </div>
+
+    <div class="feature-card fade-in">
+      <div class="feature-icon">📚</div>
+      <h3>Learn & Share Knowledge</h3>
+      <p>Exchange insights, tutorials, and experiences that matter.</p>
+    </div>
+  </div>
+
+  <script>
+    // Fade-in on scroll (already in use for Home, applies here too)
+
+    // Fade-in + bounce for feature icons
+const fadeElems = document.querySelectorAll('.fade-in');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+
+      // Animate feature icons inside cards
+      const icon = entry.target.querySelector('.feature-icon');
+      if (icon) {
+        icon.style.animation = "bounceIn 0.8s ease";
+        icon.style.opacity = "1";
+      }
+    }
+  });
+}, { threshold: 0.2 });
+
+fadeElems.forEach(el => observer.observe(el));
+
+// Animate section title underline
+const titles = document.querySelectorAll('.section-title');
+
+const titleObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.3 });
+
+titles.forEach(title => titleObserver.observe(title));
+  </script>
+</section>
+</body>
+</html>

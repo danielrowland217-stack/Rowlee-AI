@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Darkhaven Services</title>
+  <!-- Boxicons CSS -->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <style>
+  #services {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  color: #fff;
+  position: relative;
+  font-family: arial;
+}
+
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.service-card {
+  background: #1a1a1a;
+  color: white;
+  padding: 30px 20px;
+  border-radius: 15px;
+  width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #6f42c1;
+}
+
+.service-card i {
+  font-size: 45px;
+  margin-bottom: 20px;
+  color: #6f42c1;
+}
+
+.service-card h3 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  font-family: arial;
+}
+
+.service-card p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #ccc;
+  font-family: arial;
+}
+
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* behind all content */
+  background: #0d0d0d; /* dark background */
+}
+  </style>
+</head>
+<body>
+  <section id="services">
+  <h2 class="section-title">What We Offer</h2>
+  <div class="services-container">
+    <div class="service-card">
+      <i class='bx bx-group'></i>
+      <h3>Mentorship Programs</h3>
+      <p>Connect with experienced mentors to guide your projects and career growth.</p>
+    </div>
+    <div class="service-card">
+      <i class='bx bx-briefcase'></i>
+      <h3>Job Opportunities</h3>
+      <p>Access internships, remote work, and freelance projects in tech and innovation.</p>
+    </div>
+    <div class="service-card">
+      <i class='bx bx-calendar'></i>
+      <h3>Events & Workshops</h3>
+      <p>Participate in webinars, hackathons, and workshops hosted by industry experts.</p>
+    </div>
+    <div class="service-card">
+      <i class='bx bx-chat'></i>
+      <h3>Collaboration Spaces</h3>
+      <p>Join project teams, forums, and discussion channels to collaborate effectively.</p>
+    </div>
+  </div>
+
+  <canvas id="bg-canvas"></canvas>
+
+</section>
+
+<script>
+  const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+
+let particlesArray;
+
+// Set canvas size
+function initCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+initCanvas();
+window.addEventListener('resize', initCanvas);
+
+// Particle class
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 3 + 1; // 1-4px
+    this.speedX = Math.random() * 1 - 0.5; // horizontal speed
+    this.speedY = Math.random() * 1 - 0.5; // vertical speed
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    // Wrap around edges
+    if(this.x > canvas.width) this.x = 0;
+    if(this.x < 0) this.x = canvas.width;
+    if(this.y > canvas.height) this.y = 0;
+    if(this.y < 0) this.y = canvas.height;
+  }
+
+  draw() {
+    ctx.fillStyle = '#6f42c1';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// Initialize particles
+function initParticles() {
+  particlesArray = [];
+  const numberOfParticles = 100;
+  for(let i=0; i<numberOfParticles; i++){
+    particlesArray.push(new Particle());
+  }
+}
+initParticles();
+
+// Animate
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particlesArray.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>

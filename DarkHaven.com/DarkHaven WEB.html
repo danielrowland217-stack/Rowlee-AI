@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarkHaven</title>
+  <link rel="icon" href="ChatGPT Image Sep 8, 2025, 05_50_21 PM.png/favicon.ico" type="image/x-icon" >
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 102vh;
+      background: url(photo-1618477247222-acbdb0e159b3.jpg) no-repeat center center/cover;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .hero button {
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #00bfff;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .hero button:hover {
+      background-color: #009acd;
+    }
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+    /* Content above spinner */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .hero-content button {
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #00bfff;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .hero-content button:hover {
+      background-color: #009acd;
+    }
+
+  .color-spinner {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border: 15px solid rgba(255, 255, 255, 0.2); /* Transparent part */
+    border-top: 15px solid #00bfff;             /* Initial color */
+    border-radius: 50%;
+    animation: spin 3s linear infinite, colorChange 6s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  /* Spin animation */
+  @keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Color cycling animation */
+  @keyframes colorChange {
+    0%   { border-top-color: #00bfff; }
+    25%  { border-top-color: #ff6f61; }
+    50%  { border-top-color: #00ff99; }
+    75%  { border-top-color: #ffcc00; }
+    100% { border-top-color: #00bfff; }
+  }
+
+  /* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: #111;
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar .nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+}
+
+.navbar .auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.navbar .auth-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+.navbar .auth-buttons .login {
+  background: transparent;
+  border: 1px solid #00bfff;
+  color: #00bfff;
+}
+
+.navbar .auth-buttons .login:hover {
+  background: #00bfff;
+  color: white;
+}
+
+.navbar .auth-buttons .signup {
+  background: #00bfff;
+  color: white;
+}
+
+.navbar .auth-buttons .signup:hover {
+  background: #009acd;
+}
+
+/* Background Text Logo */
+.hero .bg-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20rem;   /* big size */
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.05); /* faint white on black */
+  z-index: 1;
+}
+
+.logo{
+  width: 50px;
+  border-radius: 20px;
+}
+
+.logo-name{
+  color: #00bfff;
+}
+  </style>
+</head>
+<body>
+  <section class="hero">
+     <div class="bg-logo">DH</div> <!-- Logo letters behind -->
+    <div class="hero-content">
+      <h1>Welcome to DarkHaven</h1>
+    <p>Innovative software and AI solutions for smarter business.</p>
+
+    <a href="darkhaven sign up.html">
+      <button onclick="document.getElementById('signup').classList.toggle('active')">
+    Get Started
+  </button>
+    </a> 
+    </div>
+
+    <div class="color-spinner"></div>
+
+  </section>
+
+  <!-- Navbar -->
+<nav class="navbar">
+  <img class="logo" src="ChatGPT Image Sep 8, 2025, 05_50_21 PM.png"  alt="DarkHaven">
+  <h2 class="logo-name">
+    DarkHaven
+  </h2>
+</nav>
+</html>
+</body>

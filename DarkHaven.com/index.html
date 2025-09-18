@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarkHaven Login</title>
+  <style>
+/* Login section styling */
+.login-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url(premium_photo-1661369817469-7c92d542a8cc.jpg);
+  font-family: 'Arial', sans-serif;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-container {
+  background: rgba(18, 18, 18, 0.5); /* semi-transparent */
+  padding: 2rem 2.5rem;
+  border-radius: 15px;
+  width: 320px;
+  text-align: center;
+  color: #fff;
+}
+
+
+.login-container h2 {
+  margin-bottom: 1.5rem;
+  color: #00bfff;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.login-container button {
+  width: 40%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #00bfff ;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  
+}
+
+.login-container button:hover {
+  opacity: 0.8;
+}
+
+.login-container p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.login-container a {
+  color: #00bfff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+  <!-- LOGIN SECTION -->
+<section id="login-section" class="login-section">
+  <div class="login-container">
+    <h2>Login</h2>
+    <form>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+    </form>
+    
+    <a href="darkhavenhome.html">
+    <button onclick="document.getElementById('login').classList.toggle('active')">
+      Login
+    </button>
+      </a>
+
+    <p>Don't have an account? <a href="darkhaven sign up.html">Sign Up</a></p>
+  </div>
+</section>
+</body>
+</html>

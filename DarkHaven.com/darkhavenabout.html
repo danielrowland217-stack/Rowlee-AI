@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<head>
+  <style>
+/* About Section Styles */
+.about-section {
+  padding: 80px 20px;
+  color: #ffffff;
+  height: 77vh;
+}
+
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+  gap: 40px;
+}
+
+.about-text {
+  flex: 1 1 400px;
+  min-width: 300px;
+}
+
+.about-text h2 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  color: #8a2be2; /* Accent color */
+  font-family: arial;
+}
+
+.about-text p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #cccccc;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(255, 255, 255);
+}
+
+.about-features {
+  list-style: none;
+  padding: 0;
+}
+
+.about-features li {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: dodgerblue;
+  font-weight: bold;
+}
+
+.about-visual {
+  flex: 1 1 400px;
+  min-width: 300px;
+  text-align: center;
+}
+
+.about-visual img {
+  max-width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+  width: 50%;
+}
+
+.about-visual img:hover {
+  transform: scale(1.05);
+}
+
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* behind all content */
+  background: #0d0d0d; /* dark background */
+}
+</style>
+</head>
+
+
+<body>
+  <!-- About Section -->
+<section id="about" class="about-section">
+  <div class="about-container">
+    <!-- Text -->
+    <div class="about-text">
+      <h2>About DarkHaven</h2>
+      <p>DarkHaven is your ultimate platform for secure, seamless, and immersive digital experiences. Whether you’re exploring new worlds or managing your projects, DarkHaven is designed to make your journey smooth and engaging.</p>
+      <ul class="about-features">
+        <li>🔒 Secure and private</li>
+        <li>⚡ Fast and intuitive interface</li>
+        <li>🌐 Accessible anywhere</li>
+      </ul>
+    </div>
+
+    <!-- Visual / Illustration -->
+    <div class="about-visual">
+      <img src="ChatGPT Image Sep 8, 2025, 05_50_21 PM.png" alt="DarkHaven Illustration">
+    </div>
+
+    <canvas id="bg-canvas"></canvas>
+
+  </div>
+</section>
+
+<script>
+  const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+
+let particlesArray;
+
+// Set canvas size
+function initCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+initCanvas();
+window.addEventListener('resize', initCanvas);
+
+// Particle class
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 3 + 1; // 1-4px
+    this.speedX = Math.random() * 1 - 0.5; // horizontal speed
+    this.speedY = Math.random() * 1 - 0.5; // vertical speed
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    // Wrap around edges
+    if(this.x > canvas.width) this.x = 0;
+    if(this.x < 0) this.x = canvas.width;
+    if(this.y > canvas.height) this.y = 0;
+    if(this.y < 0) this.y = canvas.height;
+  }
+
+  draw() {
+    ctx.fillStyle = '#6f42c1';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// Initialize particles
+function initParticles() {
+  particlesArray = [];
+  const numberOfParticles = 100;
+  for(let i=0; i<numberOfParticles; i++){
+    particlesArray.push(new Particle());
+  }
+}
+initParticles();
+
+// Animate
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particlesArray.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarkHaven Network</title>
+  <style>
+    .join-section {
+  padding: 80px 20px;
+  color: #fff;
+}
+
+.join-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.join-text {
+  flex: 1 1 400px;
+}
+
+.join-text h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  font-family: arial;
+  color: #8a5de3;
+}
+
+.join-text p{
+  font-family: arial;
+  line-height: 25px;
+}
+.join-text ul {
+  margin-top: 15px;
+}
+
+.join-text li {
+  margin-bottom: 10px;
+  font-family: arial;
+}
+
+.join-form {
+  flex: 1 1 400px;
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.join-form input,
+.join-form textarea {
+  width: 96%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  background: #222;
+  color: #fff;
+}
+
+.join-form button {
+  width: 100%;
+  padding: 12px;
+  background: #6f42c1;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.join-form button:hover {
+  background: #8a5de3;
+}
+
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* behind all content */
+  background: #0d0d0d; /* dark background */
+}
+  </style>
+</head>
+<body>
+  <section id="join" class="join-section">
+  <div class="join-container">
+    <!-- Left content -->
+    <div class="join-text">
+      <h2>Join the DarkHaven Network</h2>
+      <p>Be part of a growing community of innovators, developers, and creators. 
+         Connect, collaborate, and unlock opportunities.</p>
+      <ul>
+        <li>🌍 Global community</li>
+        <li>🚀 Project collaborations</li>
+        <li>🎯 Career opportunities</li>
+      </ul>
+    </div>
+
+    <!-- Right content (form) -->
+    <div class="join-form">
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" rows="5"></textarea>
+        <button type="submit">Join Now</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<canvas id="bg-canvas"></canvas>
+
+
+<script>
+  const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+
+let particlesArray;
+
+// Set canvas size
+function initCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+initCanvas();
+window.addEventListener('resize', initCanvas);
+
+// Particle class
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 3 + 1; // 1-4px
+    this.speedX = Math.random() * 1 - 0.5; // horizontal speed
+    this.speedY = Math.random() * 1 - 0.5; // vertical speed
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    // Wrap around edges
+    if(this.x > canvas.width) this.x = 0;
+    if(this.x < 0) this.x = canvas.width;
+    if(this.y > canvas.height) this.y = 0;
+    if(this.y < 0) this.y = canvas.height;
+  }
+
+  draw() {
+    ctx.fillStyle = '#6f42c1';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// Initialize particles
+function initParticles() {
+  particlesArray = [];
+  const numberOfParticles = 100;
+  for(let i=0; i<numberOfParticles; i++){
+    particlesArray.push(new Particle());
+  }
+}
+initParticles();
+
+// Animate
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particlesArray.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
